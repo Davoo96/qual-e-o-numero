@@ -1,23 +1,13 @@
 // fazendo um http request para o randomNumber
-// function send() {
-//   var xmlhttp;
-//   if (window.XMLHttpRequest) {
-//     xmlhttp = new XMLHttpRequest();
-//   } else {
-//     // code for older browsers
-//     xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-//   }
-//   xmlhttp.onreadystatechange = function() {
-//     if (this.readyState == 4 && this.status == 200) {
-//       document.getElementById("demo").innerHTML =
-//       this.responseText;
-//     }
-//   };
-//   xmlhttp.open("GET", "https://us-central1-ss-devops.cloudfunctions.net/rand?min=1&max=300", true);
-//   xmlhttp.send();
-// }
+const theUrl = 'https://us-central1-ss-devops.cloudfunctions.net/rand?min=1&max=300';
+function httpGet(theUrl) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
 
-// console.log(send());
+console.log(httpGet(theUrl));
 
 let answer = Math.floor(Math.random()*300) + 1;
 
