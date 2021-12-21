@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+body {
+font-family: 'Montserrat', sans-serif;
+}
+
+p {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #EF6C00;
+}
+
+header h1 {
+  font-size: 3.6rem;
+  font-weight: 600;
+  background: linear-gradient(#EF6C00, #DB6300);
+  position: relative;
+  padding-bottom: 25px;
+  text-align: center;
+  text-transform: uppercase;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+header .container::before {
+  content: '';
+  position: absolute;
+  background: #CFCFCF;
+  width: 40%;
+  height: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+}
+
+.container {
+  display: block;
+  max-width: 1024px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.relative {
+  position: relative;
+}
+
+input[type="text"] {
+  width: 217px;
+  padding: 14px;
+  border: 2px solid #CFCFCF;
+  border-radius: 4px;
+  margin-right: 11px;
+}
+
+input:focus {
+  outline: none !important;
+  border: 2px solid #EF6C00;
+}
+
+::placeholder {
+  color: #CFCFCF;
+}
+
+button {
+  cursor: pointer;
+  width: 70px;
+  height: 42px;
+  background: linear-gradient(#EF6C00, #DB6300);
+  border: none;
+  border-radius: 4px;
+  color: #FFFFFF;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.guess-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.play-again {
+  background: linear-gradient(#434854, #9E9E9E);
+  width: 140px;
+  height: 42px;
+  padding-left: 28px;
+  position: absolute;
+  left: 50%;
+}
+
+.play-again::before {
+  content: '';
+  background: url(../../assets/icon/try-again.svg) center no-repeat;
+  display: block;
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  left: 7px;
+  top: 9px;
+}
