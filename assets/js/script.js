@@ -8,52 +8,140 @@ let displayOne = document.getElementById('display-1');
 let displayTwo = document.getElementById('display-2');
 let displayThree = document.getElementById('display-3');
 let boxNumber = document.getElementById('numb-container');
-const numberZero = document.getElementsByClassName('display-no-0');
-const numberOne = document.getElementsByClassName('display-no-1');
-const numberTwo = document.getElementsByClassName('display-no-2');
-const numberThree = document.getElementsByClassName('display-no-3');
-const numberFour = document.getElementsByClassName('display-no-4');
-const numberFive = document.getElementsByClassName('display-no-5');
-const numberSix = document.getElementsByClassName('display-no-6');
-const numberSeven = document.getElementsByClassName('display-no-7');
-const numberEight = document.getElementsByClassName('display-no-8');
-const numberNine = document.getElementsByClassName('display-no-9');
+let realDigits = [];
+
+
+function numObj() {
+  let num = guess.value;
+  let digits = num.toString().split('');
+  realDigits = digits.map(Number);
+
+  console.log(realDigits[0], realDigits[1], realDigits[2]);
+  return realDigits[0], realDigits[1], realDigits[2];
+}
 
 
 
-// function numObj() {
-//   let numbersObj = {};
-//   numbersObj.num = guess.value;
-//   console.log(numbersObj);
-// }
-
+// Atribuir o primeiro número ao LED
 function segmentNumberOne() {
-  let user_guess = Number(guess.value);
+  numObj();
 
-  if(user_guess == 1) {
+  if(realDigits[0] == 1) {
     displayOne.classList.add('display-no-1');
-  } else if(user_guess == 2) {
+  } else if(realDigits[0] == 2) {
     displayOne.classList.add('display-no-2');
-  } else if(user_guess == 3) {
+  } else if(realDigits[0] == 3) {
     displayOne.classList.add('display-no-3');
-  } else if(user_guess == 4) {
+  } else if(realDigits[0] == 4) {
     displayOne.classList.add('display-no-4');
-  } else if(user_guess == 5) {
+  } else if(realDigits[0] == 5) {
     displayOne.classList.add('display-no-5');
-  } else if(user_guess == 6) {
+  } else if(realDigits[0] == 6) {
     displayOne.classList.add('display-no-6');
-  } else if(user_guess == 6) {
+  } else if(realDigits[0] == 6) {
     displayOne.classList.add('display-no-6');
-  } else if(user_guess == 7) {
+  } else if(realDigits[0] == 7) {
     displayOne.classList.add('display-no-7');
-  } else if(user_guess == 8) {
+  } else if(realDigits[0] == 8) {
     displayOne.classList.add('display-no-8');
-  } else if(user_guess == 9) {
+  } else if(realDigits[0] == 9) {
     displayOne.classList.add('display-no-9');
   }
 }
 
+// Atribuir o segundo número ao LED
+function segmentNumberTwo() {
+  numObj();
 
+  if(realDigits[1] == 1) {
+    displayTwo.classList.add('display-no-1');
+  } else if(realDigits[1] == 2) {
+    displayTwo.classList.add('display-no-2');
+  } else if(realDigits[1] == 3) {
+    displayTwo.classList.add('display-no-3');
+  } else if(realDigits[1] == 4) {
+    displayTwo.classList.add('display-no-4');
+  } else if(realDigits[1] == 5) {
+    displayTwo.classList.add('display-no-5');
+  } else if(realDigits[1] == 6) {
+    displayTwo.classList.add('display-no-6');
+  } else if(realDigits[1] == 6) {
+    displayTwo.classList.add('display-no-6');
+  } else if(realDigits[1] == 7) {
+    displayTwo.classList.add('display-no-7');
+  } else if(realDigits[1] == 8) {
+    displayTwo.classList.add('display-no-8');
+  } else if(realDigits[1] == 9) {
+    displayTwo.classList.add('display-no-9');
+  } else if(realDigits[1] == 0) {
+    displayTwo.classList.add('display-no-0');
+  }
+}
+
+// Atribuir o terceiro número ao LED
+function segmentNumberThree() {
+  numObj();
+
+  if(realDigits[2] == 1) {
+    displayThree.classList.add('display-no-1');
+  } else if(realDigits[2] == 2) {
+    displayThree.classList.add('display-no-2');
+  } else if(realDigits[2] == 3) {
+    displayThree.classList.add('display-no-3');
+  } else if(realDigits[2] == 4) {
+    displayThree.classList.add('display-no-4');
+  } else if(realDigits[2] == 5) {
+    displayThree.classList.add('display-no-5');
+  } else if(realDigits[2] == 6) {
+    displayThree.classList.add('display-no-6');
+  } else if(realDigits[2] == 6) {
+    displayThree.classList.add('display-no-6');
+  } else if(realDigits[2] == 7) {
+    displayThree.classList.add('display-no-7');
+  } else if(realDigits[2] == 8) {
+    displayThree.classList.add('display-no-8');
+  } else if(realDigits[2] == 9) {
+    displayThree.classList.add('display-no-9');
+  } else if(realDigits[2] == 0) {
+    displayThree.classList.add('display-no-0');
+  }
+}
+
+// tirar a classe display-no-x para poder inserir o numero novo
+function removeSegmentNum() {
+  displayOne.classList.remove('display-no-0');
+  displayOne.classList.remove('display-no-1');
+  displayOne.classList.remove('display-no-2');
+  displayOne.classList.remove('display-no-3');
+  displayOne.classList.remove('display-no-4');
+  displayOne.classList.remove('display-no-5');
+  displayOne.classList.remove('display-no-6');
+  displayOne.classList.remove('display-no-7');
+  displayOne.classList.remove('display-no-8');
+  displayOne.classList.remove('display-no-9');
+
+  displayTwo.classList.remove('display-no-1');
+  displayTwo.classList.remove('display-no-2');
+  displayTwo.classList.remove('display-no-3');
+  displayTwo.classList.remove('display-no-4');
+  displayTwo.classList.remove('display-no-5');
+  displayTwo.classList.remove('display-no-6');
+  displayTwo.classList.remove('display-no-7');
+  displayTwo.classList.remove('display-no-8');
+  displayTwo.classList.remove('display-no-9');
+
+  displayThree.classList.remove('display-no-1');
+  displayThree.classList.remove('display-no-2');
+  displayThree.classList.remove('display-no-3');
+  displayThree.classList.remove('display-no-4');
+  displayThree.classList.remove('display-no-5');
+  displayThree.classList.remove('display-no-6');
+  displayThree.classList.remove('display-no-7');
+  displayThree.classList.remove('display-no-8');
+  displayThree.classList.remove('display-no-9');
+}
+
+// começar o jogo com o número zero
 function startGame() {
   displayTwo.classList.add('disable');
   displayThree.classList.add('disable');
@@ -93,15 +181,25 @@ console.log(randomNumber());
 
 // Função para definir se a resposta for maior, menor ou se acertou o número.
 function sendNumber() {
+  removeSegmentNum();
   let user_guess = Number(guess.value);
+  console.log(user_guess.toString().length);
 
-  if(guess.value.length == 1) {
+  if(user_guess.toString().length == 1) {
     displayOne.classList.remove('display-no-0');
+    displayTwo.classList.add('disable');
+    displayThree.classList.add('disable');
     segmentNumberOne();
-  } else if(guess.value.length == 2) {
+  } else if(user_guess.toString().length == 2) {
     displayTwo.classList.remove('disable');
-  } else if (guess.value.length == 3) {
+    segmentNumberOne();
+    segmentNumberTwo();
+  } else if (user_guess.toString().length == 3) {
+    displayTwo.classList.remove('disable');
     displayThree.classList.remove('disable');
+    segmentNumberOne();
+    segmentNumberTwo();
+    segmentNumberThree();
   }
 
   // Conferindo que o usuário digite um número entre 1 e 300
@@ -113,29 +211,25 @@ function sendNumber() {
       msg1.textContent = 'É maior';
       boxNumber.classList.add('mt-30');
       // mostrando o número do usuário no LED e deixando vazia a caixa de respostas
-      guessedNumber.innerHTML = user_guess;
       guess.value = '';
       guess.focus();
     } else if(user_guess > answer) {
       msg1.textContent = 'É menor';
       boxNumber.classList.add('mt-30');
-      guessedNumber.innerHTML = user_guess;
       guess.value = '';
       guess.focus();
     } else if(user_guess == answer) {
       msg1.textContent = 'Você acertou!!!!';
       boxNumber.classList.add('mt-30');
-      displayOne.classList.add(numDisplay, 'green');
-      displayTwo.classList.add(numDisplay2, 'green');
-      displayThree.classList.add(numDisplay3, 'green');
-      guessedNumber.innerHTML = user_guess;
+      msg1.classList.add('green-text');
+      displayOne.classList.add('green');
+      displayTwo.classList.add('green');
+      displayThree.classList.add('green');
       guess.value = '';
       guess.focus();
       setGameOver();
     }
   }
-
-  console.log(user_guess.length);
 }
 
 // Função para finalizar o jogo e criando o botão para jogar novamente
@@ -152,12 +246,22 @@ function setGameOver() {
 
 // Função para reiniciar um novo jogo
 function newGame() {
+  removeSegmentNum();
   playAgain.parentNode.removeChild(playAgain);
+  msg1.classList.remove('green-text');
+  msg1.classList.remove('red-text');
+  displayOne.classList.remove('green');
+  displayTwo.classList.remove('green');
+  displayThree.classList.remove('green');
+  displayOne.classList.remove('red');
+  displayTwo.classList.remove('red');
+  displayThree.classList.remove('red');
+  boxNumber.classList.remove('mt-30');
   guess.disabled = false;
   sendBtn.disabled = false;
-  guessedNumber.innerHTML = 0;
   msg1.textContent = '';
   answer = randomNumber();
+  startGame();
 }
 
 function numberLength() {
@@ -167,5 +271,3 @@ function numberLength() {
 }
 
 startGame();
-console.log(numberLength());
-

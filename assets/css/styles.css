@@ -89,6 +89,8 @@ button {
   padding-left: 28px;
   position: absolute;
   left: 50%;
+  transform: translateX(-50%);
+  bottom: 470px;
 }
 
 .play-again::before {
@@ -181,6 +183,26 @@ button {
   .display-container.display-size-12.red .segment-x {
     border-bottom-color: #CC3300;
   }
+
+  .display-container.display-size-12.green .segment-y .segment-border {
+    border-left-color: #32BF00;
+  }
+
+  .display-container.display-size-12.green .segment-x .segment-border {
+    border-top-color: #32BF00;
+  }
+
+  .display-container.display-size-12.green .segment-y {
+    border-right-color: #32BF00;
+  }
+
+  .display-container.display-size-12.green .segment-x {
+    border-bottom-color: #32BF00;
+  }
+
+  .green-text {
+    color: #32BF00;
+  }
   
   .display-container.display-size-12 .segment-a {
     top: 0;
@@ -216,50 +238,118 @@ button {
   
   .display-no-1 .segment-a,
   .display-no-1 .segment-d,
-  .display-no-1 .segment-e,
-  .display-no-1 .segment-f,
   .display-no-1 .segment-g {
     /*display: none;*/
     opacity: 0.1;
     filter: alpha(opacity=10);
+    border-bottom-color: #000 !important;
   }
-  
-  .display-no-2 .segment-c,
-  .display-no-2 .segment-f {
-    /*display: none;*/
+
+  .display-no-1 .segment-e,
+  .display-no-1 .segment-f {
     opacity: 0.1;
+    filter: alpha(opacity=10);
+    border-right-color: #000 !important;
+  }
+
+  .display-no-1 .segment-a .segment-border,
+  .display-no-1 .segment-d .segment-border,
+  .display-no-1 .segment-g .segment-border {
+    border-top-color: #000 !important;
+  }
+
+  .display-no-1 .segment-e .segment-border,
+  .display-no-1 .segment-f .segment-border {
+    border-left-color: #000 !important;
+  }
+   
+  .display-no-2 .segment-c, 
+  .display-no-2 .segment-f { 
+    /*display: none;*/ 
+    opacity: 0.1;
+    border-right-color: #000 !important;
+  }
+
+  .display-no-2 .segment-c .segment-border, .display-no-2 .segment-f .segment-border {
+    border-left-color: #000 !important;
   }
   
   .display-no-3 .segment-e,
   .display-no-3 .segment-f {
     /*display: none;*/
     opacity: 0.1;
+    border-right-color: #000 !important;
+  }
+
+  .display-no-3 .segment-e .segment-border,
+  .display-no-3 .segment-f .segment-border {
+    border-left-color: #000 !important;
   }
   
   .display-no-4 .segment-a,
-  .display-no-4 .segment-d,
-  .display-no-4 .segment-e {
+  .display-no-4 .segment-d {
     /*display: none;*/
     opacity: 0.1;
+    border-bottom-color: #000 !important;
+  }
+
+  .display-no-4 .segment-e {
+    opacity: 0.1;
+    border-right-color: #000 !important;
+  }
+
+  .display-no-4 .segment-a .segment-border,
+  .display-no-4 .segment-d .segment-border {
+    border-top-color: #000 !important;
+  }
+
+  .display-no-4 .segment-e .segment-border {
+    border-left-color: #000 !important;
   }
   
   .display-no-5 .segment-b,
   .display-no-5 .segment-e {
     /*display: none;*/
     opacity: 0.1;
+    border-right-color: #000 !important;
+  }
+
+  .display-no-5 .segment-b .segment-border,
+  .display-no-5 .segment-e .segment-border {
+    border-left-color: #000 !important;
   }
   
   .display-no-6 .segment-b {
     /*display: none;*/
     opacity: 0.1;
+    border-right-color: #000 !important;
+  }
+
+  .display-no-6 .segment-b .segment-border {
+    border-left-color: #000 !important;
   }
   
   .display-no-7 .segment-d,
-  .display-no-7 .segment-e,
-  .display-no-7 .segment-f,
   .display-no-7 .segment-g {
     /*display: none;*/
     opacity: 0.1;
+    border-bottom-color: #000 !important;
+  }
+
+  .display-no-7 .segment-e,
+  .display-no-7 .segment-f {
+    opacity: 0.1;
+    border-right-color: #000 !important;
+  }
+
+  .display-no-7 .segment-d .segment-border,
+  .display-no-7 .segment-g .segment-border {
+    border-top-color: #000 !important;
+  }
+
+  .display-no-7 .segment-e .segment-border,
+  .display-no-7 .segment-f .segment-border {
+    border-left-color: #000 !important;
   }
   
   .display-no-8 {}
@@ -267,11 +357,21 @@ button {
   .display-no-9 .segment-e {
     /*display: none;*/
     opacity: 0.1;
+    border-right-color: #000 !important;
+  }
+
+  .display-no-9 .segment-e .segment-border {
+    border-left-color: #000 !important;
   }
   
   .display-no-0 .segment-g {
     /*display: none;*/
     opacity: 0.1;
+    border-bottom-color: #000 !important;
+  }
+
+  .display-no-0 .segment-g .segment-border {
+    border-top-color: #000 !important;
   }
   
   #vertical-center {
