@@ -109,11 +109,10 @@ button {
 .display-container.display-size-12 {
   margin-bottom: 24px;
 }
-  
-  
+   
 .display-container {
   position: relative;
-  margin-right: 24px;
+  margin-right: 11px;
   float: left;
 }
   
@@ -128,43 +127,43 @@ button {
 }
   
   .display-container.display-size-12 {
-    width: 122px;
-    height: 220px;
+    width: 97px;
+    height: 177px;
   }
   
   .display-container.display-size-12 .segment-x {
-    width: 72px;
-    left: 13px;
-    border-bottom: 12px solid #000;
-    border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
+    width: 64px;
+    left: 10px;
+    border-bottom: 7.5px solid #000;
+    border-left: 7.5px solid transparent;
+    border-right: 7.5px solid transparent;
   }
   
   .display-container.display-size-12 .segment-x .segment-border {
-    top: 12px;
-    left: -12px;
-    right: -12px;
-    border-top: 12px solid #000;
-    border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
+    top: 7px;
+    left: -7.5px;
+    right: -7.5px;
+    border-top: 7.5px solid #000;
+    border-left: 7.5px solid transparent;
+    border-right: 7.5px solid transparent;
   }
   
   .display-container.display-size-12 .segment-y {
-    height: 72px;
+    height: 64px;
     width: 0;
-    border-right: 12px solid #000;
-    border-top: 12px solid transparent;
-    border-bottom: 12px solid transparent;
+    border-right: 7.5px solid #000;
+    border-top: 7.5px solid transparent;
+    border-bottom: 7.5px solid transparent;
   }
   
   .display-container.display-size-12 .segment-y .segment-border {
     position: relative;
-    left: 12px;
-    height: 72px;
-    margin-top: -12px;
-    border-left: 12px solid #000;
-    border-top: 12px solid transparent;
-    border-bottom: 12px solid transparent;
+    left: 7px;
+    height: 64px;
+    margin-top: -7.5px;
+    border-left: 7.5px solid #000;
+    border-top: 7.5px solid transparent;
+    border-bottom: 7.5px solid transparent;
   }
 
   .display-container.display-size-12.red .segment-y .segment-border {
@@ -188,31 +187,31 @@ button {
   }
   
   .display-container.display-size-12 .segment-b {
-    top: 13px;
-    left: 98px;
+    top: 9px;
+    left: 83px;
   }
   
   .display-container.display-size-12 .segment-c {
-    top: 111px;
-    left: 98px;
+    top: 90px;
+    left: 83px;
   }
   
   .display-container.display-size-12 .segment-d {
-    top: 196px;
+    top: 162px;
   }
   
   .display-container.display-size-12 .segment-e {
-    top: 111px;
+    top: 90px;
     left: 0px;
   }
   
   .display-container.display-size-12 .segment-f {
-    top: 13px;
+    top: 9px;
     left: 0px;
   }
   
   .display-container.display-size-12 .segment-g {
-    top: 98px;
+    top: 81px;
   }
   
   .display-no-1 .segment-a,
@@ -283,14 +282,28 @@ button {
   }
 
   .container.number-container {
-    min-height: 400px;
+    min-height: 177px;
+    margin-top: 100px;
+    margin-bottom: 140px;
   }
   
   #number-box {
-    height: 220px;
+    height: 178px;
     display: block;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  .red-text {
+    color: #CC3300;
+  }
+
+  .mt-30 {
+    margin-top: 30px !important;
+  }
+
+  .disable {
+    display: none;
   }
