@@ -4,6 +4,9 @@ const msg1 = document.getElementById('mensagem1');
 const sendBtn = document.getElementById('send-btn');
 let guessedNumber = document.getElementById('guessedNumber');
 let answer;
+let displayOne = document.getElementById('display-1');
+let displayTwo = document.getElementById('display-2');
+let displayThree = document.getElementById('display-3');
 
 
 
@@ -23,8 +26,10 @@ function randomNumber() {
       answer = myObj.value; // pegando o valor que esta dentro de "value"
       console.log(answer); // verificar no console que o valor certo foi pego
     } else if ( this.status!=200) {
-      msg1.textContent = 'Erro';
-      guessedNumber.value = 502;
+      msg1.textContent = 'ERRO';
+      displayOne.classList.add('display-no-5', 'red');
+      displayTwo.classList.add('display-no-0', 'red');
+      displayThree.classList.add('display-no-2', 'red');
     }
   }
 }
@@ -80,3 +85,11 @@ function newGame() {
   msg1.textContent = '';
   answer = randomNumber();
 }
+
+function numberLength() {
+  for(let i = 0; i < guess.length; i++){
+    console.log(guess[i]);
+  }
+}
+
+console.log(numberLength());
