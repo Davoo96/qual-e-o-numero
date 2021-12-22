@@ -192,6 +192,7 @@ function sendNumber() {
     segmentNumberOne();
   } else if(user_guess.toString().length == 2) {
     displayTwo.classList.remove('disable');
+    displayThree.classList.add('disable');
     segmentNumberOne();
     segmentNumberTwo();
   } else if (user_guess.toString().length == 3) {
