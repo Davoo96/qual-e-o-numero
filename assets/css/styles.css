@@ -46,6 +46,16 @@ header .container::before {
   position: relative;
 }
 
+.guess-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ======================================
+  Input
+====================================== */
+
 input[type="text"] {
   width: 217px;
   padding: 14px;
@@ -63,6 +73,10 @@ input:focus {
   color: #CFCFCF;
 }
 
+/* ======================================
+  Buttons
+====================================== */
+
 button {
   cursor: pointer;
   width: 70px;
@@ -76,10 +90,9 @@ button {
   text-transform: uppercase;
 }
 
-.guess-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+button:disabled {
+  background: #DDDDDD;
+  cursor: initial;
 }
 
 .play-again {
@@ -102,11 +115,6 @@ button {
   height: 24px;
   left: 7px;
   top: 9px;
-}
-
-button:disabled {
-  background: #DDDDDD;
-  cursor: initial;
 }
 
 /* ======================================
@@ -244,7 +252,6 @@ button:disabled {
   .display-no-1 .segment-a,
   .display-no-1 .segment-d,
   .display-no-1 .segment-g {
-    /*display: none;*/
     opacity: 0.1;
     filter: alpha(opacity=10);
     border-bottom-color: #000 !important;
@@ -269,8 +276,7 @@ button:disabled {
   }
    
   .display-no-2 .segment-c, 
-  .display-no-2 .segment-f { 
-    /*display: none;*/ 
+  .display-no-2 .segment-f {
     opacity: 0.1;
     border-right-color: #000 !important;
   }
@@ -281,7 +287,6 @@ button:disabled {
   
   .display-no-3 .segment-e,
   .display-no-3 .segment-f {
-    /*display: none;*/
     opacity: 0.1;
     border-right-color: #000 !important;
   }
@@ -293,7 +298,6 @@ button:disabled {
   
   .display-no-4 .segment-a,
   .display-no-4 .segment-d {
-    /*display: none;*/
     opacity: 0.1;
     border-bottom-color: #000 !important;
   }
@@ -314,7 +318,6 @@ button:disabled {
   
   .display-no-5 .segment-b,
   .display-no-5 .segment-e {
-    /*display: none;*/
     opacity: 0.1;
     border-right-color: #000 !important;
   }
@@ -325,7 +328,6 @@ button:disabled {
   }
   
   .display-no-6 .segment-b {
-    /*display: none;*/
     opacity: 0.1;
     border-right-color: #000 !important;
   }
@@ -336,7 +338,6 @@ button:disabled {
   
   .display-no-7 .segment-d,
   .display-no-7 .segment-g {
-    /*display: none;*/
     opacity: 0.1;
     border-bottom-color: #000 !important;
   }
@@ -357,10 +358,7 @@ button:disabled {
     border-left-color: #000 !important;
   }
   
-  .display-no-8 {}
-  
   .display-no-9 .segment-e {
-    /*display: none;*/
     opacity: 0.1;
     border-right-color: #000 !important;
   }
@@ -370,20 +368,12 @@ button:disabled {
   }
   
   .display-no-0 .segment-g {
-    /*display: none;*/
     opacity: 0.1;
     border-bottom-color: #000 !important;
   }
 
   .display-no-0 .segment-g .segment-border {
     border-top-color: #000 !important;
-  }
-  
-  #vertical-center {
-    position: absolute;
-    height: 0;
-    top: 50%;
-    left: 50%
   }
 
   .container.number-container {
@@ -400,21 +390,26 @@ button:disabled {
     align-items: center;
   }
 
-  .red-text {
-    color: #CC3300;
-  }
 
-  .mt-30 {
-    margin-top: 30px !important;
-  }
+/* ======================================
+  JavaScript
+====================================== */
 
-  .mt {
-    margin-top: 50px !important;
-  }
+.red-text {
+  color: #CC3300;
+}
 
-  .disable {
-    display: none;
-  }
+.mt-30 {
+  margin-top: 30px !important;
+}
+
+.mt {
+  margin-top: 50px !important;
+}
+
+.disable {
+  display: none;
+}
 
   @media only screen and (max-width : 632px), (max-width : 633px) and (orientation: portrait) {
     header h1 {
