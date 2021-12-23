@@ -4,7 +4,17 @@
   * Em uma requisição Ajax é preciso inicializar com XMLHttpRequest(), especificar o enpoint e o método de HTTP, que no caso utilizei GET. 
   * Após especificar o endpoint se utiliza o método "open()" para juntar o HTTP e o endpoint e fazer a chamada com o método "send()" para mandar a requisição.
   * Para checar o status da requisição fiz uma condição utilizando dois métodos, "readyState" e "status".
-  * Na estruturação do código utilizei várias funções, algumas delas com condições dentro para definir os diferentes resultados que poderiam acontecer. */
+  * Na estruturação do código utilizei várias funções, algumas delas com condições dentro para definir os diferentes resultados que poderiam acontecer.
+  * Para iniciar o LED com o número zero e só disponibilizando um número utilizei a função startGame().
+  * Quando ocorrer erro a função errorRestart() é utilizada para trocar a cor do LED e disponibilizar o botão de "Nova partida".
+  * Para começar um novo jogo utilizo a função newGame() que retira as classes atribuidas no jogo anterior e chama as funções randomNumber() e startGame() para receber um novo número e começar com o LED em zero.
+  * Caso o usuári acertar o número recebido pela requisição vai ser chamada a função setGameOver() para disponibilizar o botão de "Nova partida" e se for pressionado o botão chama a função newGame().
+  * Sempre que o usuário inserir um valor vai ser disponibilizada uma mensagem dando dicas ou afirmando se acertou ou se houve erro.
+  * Para definir o valor inserido e se o usuário colocou um valor maior, menor ou igual ao valor recebido pela requisição utilizo a função sendNumber() para fazer as condições e comparar o número inserido e o número recebido.
+  * Para atribuir classes no LED e disponibilizar o número correto na tela primeiro precisei separar o valor que foi inserido pelo usuário utilizando a função numObj(). 
+  * Após separar o número inserido pelo usuário nos possíveis 3 valores uso as funções segmentNumberOne(), segmentNumberTwo() e segmentNumberThree() para disponibilizar o LED com o valor que foi inserido 
+  * Para retirar todas as classes dos números LED utilizo a função removeSegmentNum. 
+*/
 
 // declarando variaveis
 let guess = document.getElementById('guess');
@@ -18,7 +28,7 @@ let displayThree = document.getElementById('display-3');
 let boxNumber = document.getElementById('numb-container');
 let realDigits = [];
 
-// função para fazer a requisição
+// fazer a requisição
 function randomNumber() {
   // fazendo um http request para o número aleatório com Ajax
   const Http = new XMLHttpRequest(); // inicializando o request
@@ -48,8 +58,9 @@ function randomNumber() {
 function sendNumber() {
   removeSegmentNum();
   let user_guess = Number(guess.value);
-  // console.log(user_guess.toString().length); verificando o tamanho do valor inserido
+  // console.log(user_guess.toString().length); // verificando o tamanho do valor inserido
 
+  // atribuindo as classes no LED dependendo do tamanho do valor inserido
   if(user_guess.toString().length == 1) { // tornando o valor em string para conseguir ver o "length" dele
     displayOne.classList.remove('display-no-0');
     displayTwo.classList.add('disable');
@@ -68,7 +79,7 @@ function sendNumber() {
     segmentNumberThree();
   }
 
-  // Conferindo que o usuário digite um número entre 1 e 300
+  // Conferindo que o usuário digite um número entre 1 e 300 e condições para saber se o valor inserido é maior, menor ou se acertou
   if(user_guess < 1 || user_guess > 300 || user_guess == 0) {
     alert('Por favor insira um número entre 1 e 300.');
     startGame();
@@ -93,7 +104,7 @@ function sendNumber() {
       displayThree.classList.add('green');
       guess.value = '';
       guess.focus();
-      setGameOver();
+      setGameOver(); // caso acertar o numero aleatório finalizo o jogo e disponibilizo botão de "Nova partida"
     }
   }
 }
@@ -114,7 +125,7 @@ function setGameOver() {
   playAgain.appendChild(playAgainText);
   playAgain.classList.add('play-again');
   document.body.appendChild(playAgain);
-  playAgain.addEventListener('click', newGame);
+  playAgain.addEventListener('click', newGame); // Caso o botão for clicado pelo usuário começa um novo jogo
 }
 
 // Criar um novo jogo
@@ -133,8 +144,8 @@ function newGame() {
   guess.disabled = false;
   sendBtn.disabled = false;
   msg1.textContent = '';
-  answer = randomNumber();
-  startGame();
+  answer = randomNumber(); // fazendo a requisição novamente para um novo número
+  startGame(); // começando o jogo com o LED em zero
 }
 
 // trocar a cor e os valores do LED quando a requisição retornar um erro
@@ -148,7 +159,7 @@ function errorRestart() {
   displayOne.classList.add('display-no-5', 'red');
   displayTwo.classList.add('display-no-0', 'red');
   displayThree.classList.add('display-no-2', 'red');
-  setGameOver();
+  setGameOver(); // Caso der erro disponibilizar o botão "Nova partida" para começar uma partida sem erro
 }
 
 // separando o número em 3 valores
@@ -185,7 +196,7 @@ function segmentNumberOne() {
     displayOne.classList.add('display-no-8');
   } else if(realDigits[0] == 9) {
     displayOne.classList.add('display-no-9');
-  } else if(realDigits[0] == 0) {
+  } else if(realDigits[0] == 0) { // Condição para o usuário não começar com 0 o seu valor
     alert('O número não pode começar com 0!');
     startGame();
   }
