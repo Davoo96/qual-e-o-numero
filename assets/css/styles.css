@@ -104,6 +104,11 @@ button {
   top: 9px;
 }
 
+button:disabled {
+  background: #DDDDDD;
+  cursor: initial;
+}
+
 /* ======================================
   Numero de 7 segmentos
 ====================================== */

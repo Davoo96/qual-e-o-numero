@@ -16,7 +16,7 @@ function numObj() {
   let digits = num.toString().split('');
   realDigits = digits.map(Number);
 
-  console.log(realDigits[0], realDigits[1], realDigits[2]);
+  console.log(realDigits);
   return realDigits[0], realDigits[1], realDigits[2];
 }
 
@@ -120,6 +120,7 @@ function removeSegmentNum() {
   displayOne.classList.remove('display-no-8');
   displayOne.classList.remove('display-no-9');
 
+  displayTwo.classList.remove('display-no-0');
   displayTwo.classList.remove('display-no-1');
   displayTwo.classList.remove('display-no-2');
   displayTwo.classList.remove('display-no-3');
@@ -130,6 +131,7 @@ function removeSegmentNum() {
   displayTwo.classList.remove('display-no-8');
   displayTwo.classList.remove('display-no-9');
 
+  displayThree.classList.remove('display-no-0');
   displayThree.classList.remove('display-no-1');
   displayThree.classList.remove('display-no-2');
   displayThree.classList.remove('display-no-3');

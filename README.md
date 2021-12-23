@@ -1,2 +1,2 @@
 # qual-e-o-numero
-Prova de teste técnico que fiz para o STUDIO SOL
+Prova técnica que fiz para o STUDIO SOL
