@@ -10,21 +10,61 @@ let displayThree = document.getElementById('display-3');
 let boxNumber = document.getElementById('numb-container');
 let realDigits = [];
 
+// função para receber o número aleatório
+function randomNumber() {
+  // fazendo um http request para o número aleatório com Ajax
+  const Http = new XMLHttpRequest(); // inicializando o request
+  const url = 'https://us-central1-ss-devops.cloudfunctions.net/rand?min=1&max=300'; // Colocando o url em uma variavel que vai ser utilizado para definir o endpoint
+  Http.open("GET", url); // junto o "GET" com o endpoint do url
+  Http.send(); // enviando o request para poder receber o objeto 
 
+  // Verificando o estado do request
+  Http.onreadystatechange=function() {
+    if(this.readyState==4) { // se o state for == 4 significa que o request foi feito
+      // se o request foi feito pego o objeto e separo so o valor que preciso do JSON
+      let myJSON = Http.responseText;
+      let myObj = JSON.parse(myJSON);
+      answer = myObj.value; // pegando o valor que esta dentro do objeto na chave "value"
+      console.log(answer); // verificar no console que o valor certo foi pego
+      console.log(Http.responseText); // verificar no console que o valor certo foi pego
+    } else if (this.status !== 200) {
+      let answer2 = Http.responseText;
+      let myObj2 = JSON.parse(answer2);
+      answer = myObj2.value;
+      errorRestart();
+      console.log(answer2);
+    }
+  }
+}
+
+function errorRestart() {
+  msg1.textContent = 'ERRO';
+  msg1.classList.add('red-text', 'mt');
+  boxNumber.classList.add('mt-30');
+  displayOne.classList.remove('display-no-0');
+  displayTwo.classList.remove('disable');
+  displayThree.classList.remove('disable');
+  displayOne.classList.add('display-no-5', 'red');
+  displayTwo.classList.add('display-no-0', 'red');
+  displayThree.classList.add('display-no-2', 'red');
+  setGameOver();
+}
+
+// separando o  número em 3 valores
 function numObj() {
   let num = guess.value;
-  let digits = num.toString().split('');
-  realDigits = digits.map(Number);
+  let digits = num.toString().split(''); // gerando a variavel com o valor em uma string e utilizando split para dividir os numeros em valores separados
+  realDigits = digits.map(Number); // voltando os valores de string para numeros
 
   console.log(realDigits);
-  return realDigits[0], realDigits[1], realDigits[2];
+  return realDigits[0], realDigits[1], realDigits[2]; // retornando os valores separados
 }
 
 
 
-// Atribuir o primeiro número ao LED
+// Verificando o primer número para atribuir a classe correta no LED
 function segmentNumberOne() {
-  numObj();
+  numObj(); 
 
   if(realDigits[0] == 1) {
     displayOne.classList.add('display-no-1');
@@ -49,7 +89,7 @@ function segmentNumberOne() {
   }
 }
 
-// Atribuir o segundo número ao LED
+// Verificando o segundo número para atribuir a classe correta no LED
 function segmentNumberTwo() {
   numObj();
 
@@ -78,7 +118,7 @@ function segmentNumberTwo() {
   }
 }
 
-// Atribuir o terceiro número ao LED
+// Verificando o primer número para atribuir a classe correta no LED
 function segmentNumberThree() {
   numObj();
 
@@ -107,7 +147,7 @@ function segmentNumberThree() {
   }
 }
 
-// tirar a classe display-no-x para poder inserir o numero novo
+// removendo as classes display-no-x para poder inserir o numero novo
 function removeSegmentNum() {
   displayOne.classList.remove('display-no-0');
   displayOne.classList.remove('display-no-1');
@@ -148,35 +188,6 @@ function startGame() {
   displayTwo.classList.add('disable');
   displayThree.classList.add('disable');
   displayOne.classList.add('display-no-0');
-}
-
-function randomNumber() {
-  // fazendo um http request para o número aleatório com Ajax
-  const Http = new XMLHttpRequest(); // inicializando o request
-  const url = 'https://us-central1-ss-devops.cloudfunctions.net/rand?min=1&max=300'; // Colocando o url em uma variavel que vai ser utilizado para definir o endpoint
-  Http.open("GET", url); // junto o "GET" com o endpoint do url
-  Http.send(); // enviando o request para poder receber o objeto 
-
-  // Verificando o estado do request
-  Http.onreadystatechange=function() {
-    if(this.readyState==4) { // se o state for == 4 significa que o request foi feito
-      // se o request foi feito pego o objeto e separo so o valor que preciso do JSON
-      let myJSON = Http.responseText;
-      let myObj = JSON.parse(myJSON);
-      answer = myObj.value; // pegando o valor que esta dentro de "value"
-      console.log(answer); // verificar no console que o valor certo foi pego
-    } else if ( this.status!=200) {
-      msg1.textContent = 'ERRO';
-      msg1.classList.add('red-text');
-      boxNumber.classList.add('mt-30');
-      displayOne.classList.remove('display-no-0');
-      displayTwo.classList.remove('disable');
-      displayThree.classList.remove('disable');
-      displayOne.classList.add('display-no-5', 'red');
-      displayTwo.classList.add('display-no-0', 'red');
-      displayThree.classList.add('display-no-2', 'red');
-    }
-  }
 }
 
 console.log(randomNumber());
@@ -224,7 +235,7 @@ function sendNumber() {
     } else if(user_guess == answer) {
       msg1.textContent = 'Você acertou!!!!';
       boxNumber.classList.add('mt-30');
-      msg1.classList.add('green-text');
+      msg1.classList.add('green-text', 'mt');
       displayOne.classList.add('green');
       displayTwo.classList.add('green');
       displayThree.classList.add('green');
@@ -265,12 +276,6 @@ function newGame() {
   msg1.textContent = '';
   answer = randomNumber();
   startGame();
-}
-
-function numberLength() {
-  for(let i = 0; i < guess.length; i++){
-    console.log(guess[i]);
-  }
 }
 
 startGame();
