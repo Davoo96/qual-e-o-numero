@@ -1,9 +1,9 @@
 /* 
   * A lógica do programa se baseia em receber um número aleatório fazendo requisição e o usuário precisa acertar esse número que foi recebido.
-  * Para fazer a requisição utilizei Ajax.
-  * Em uma requisição Ajax é preciso inicializar com XMLHttpRequest(), especificar o enpoint e o método de HTTP, que no caso utilizei GET. 
-  * Após especificar o endpoint se utiliza o método "open()" para juntar o HTTP e o endpoint e fazer a chamada com o método "send()" para mandar a requisição.
-  * Para checar o status da requisição fiz uma condição utilizando dois métodos, "readyState" e "status".
+  * Para fazer a requisição utilizei fetch().
+  * Em uma requisição fetch é preciso colocar dentro de uma variável o url. 
+  * Após colocar o url dentro da variável se utiliza .then() para pegar o valor e transforma-lo em json com .json que retorna um objeto.
+  * Para obter o número gerado pelo url utilizo a key dentro do objeto que no caso é "value" e com isso consigo obter o número com .value.
   * Na estruturação do código utilizei várias funções, algumas delas com condições dentro para definir os diferentes resultados que poderiam acontecer.
   * Para iniciar o LED com o número zero e só disponibilizando um número utilizei a função startGame().
   * Quando ocorrer erro a função errorRestart() é utilizada para trocar a cor do LED e disponibilizar o botão de "Nova partida".
@@ -30,43 +30,33 @@ let realDigits = [];
 
 // fazer a requisição
 function randomNumber() {
-  // fazendo um http request para o número aleatório com Ajax
-  const Http = new XMLHttpRequest(); // inicializando o request
-  const url = 'https://us-central1-ss-devops.cloudfunctions.net/rand?min=1&max=300'; // Colocando o url em uma variavel que vai ser utilizado para definir o endpoint
-  Http.open("GET", url); // junto o "GET" com o endpoint do url
-  Http.send(); // enviando o request para poder receber o objeto 
+  const randomNumber1 = fetch('https://us-central1-ss-devops.cloudfunctions.net/rand?min=1&max=300');
 
-  // Verificando o estado do request
-  Http.onreadystatechange=function() {
-    if(this.readyState==4) { // se o state for == 4 significa que o request foi feito
-      // se o request foi feito pego o objeto e separo so o valor que preciso do JSON
-      let myJSON = Http.responseText;
-      let myObj = JSON.parse(myJSON);
-      answer = myObj.value; // pegando o valor que esta dentro do objeto na chave "value"
-      // console.log(answer); // verificar no console que o valor certo foi pego
-      // console.log(Http.responseText); // verificar no console o valor que a requisição retornou
-    } else if (this.status != 200) {
-      let answer2 = Http.responseText;
-      let myObj2 = JSON.parse(answer2);
-      answer = myObj2.value;
-      errorRestart();
-    }
-  }
+  randomNumber1.then(r => r.json())
+    .then(numberR => {
+      if (numberR.StatusCode) {
+        answer = numberR.StatusCode;
+        errorRestart();
+      } else {
+        answer = numberR.value;
+      }
+    });
 }
 
 // definir se a resposta for maior, menor ou se acertou o número.
 function sendNumber() {
   removeSegmentNum();
+
   let user_guess = Number(guess.value);
   // console.log(user_guess.toString().length); // verificando o tamanho do valor inserido
 
   // atribuindo as classes no LED dependendo do tamanho do valor inserido
-  if(user_guess.toString().length == 1) { // tornando o valor em string para conseguir ver o "length" dele
+  if (user_guess.toString().length == 1) { // tornando o valor em string para conseguir ver o "length" dele
     displayOne.classList.remove('display-no-0');
     displayTwo.classList.add('disable');
     displayThree.classList.add('disable');
     segmentNumberOne();
-  } else if(user_guess.toString().length == 2) {
+  } else if (user_guess.toString().length == 2) {
     displayTwo.classList.remove('disable');
     displayThree.classList.add('disable');
     segmentNumberOne();
@@ -80,22 +70,22 @@ function sendNumber() {
   }
 
   // Conferindo que o usuário digite um número entre 1 e 300 e condições para saber se o valor inserido é maior, menor ou se acertou
-  if(user_guess < 1 || user_guess > 300 || user_guess == 0) {
+  if (user_guess < 1 || user_guess > 300 || user_guess == 0) {
     alert('Por favor insira um número entre 1 e 300.');
     startGame();
   } else {
-    if(user_guess < answer) {
+    if (user_guess < answer) {
       msg1.textContent = 'É maior';
       boxNumber.classList.add('mt-30');
       // mostrando o número do usuário no LED e deixando vazia a caixa de respostas
       guess.value = '';
       guess.focus();
-    } else if(user_guess > answer) {
+    } else if (user_guess > answer) {
       msg1.textContent = 'É menor';
       boxNumber.classList.add('mt-30');
       guess.value = '';
       guess.focus();
-    } else if(user_guess == answer) {
+    } else if (user_guess == answer) {
       msg1.textContent = 'Você acertou!!!!';
       boxNumber.classList.add('mt-30');
       msg1.classList.add('green-text', 'mt');
@@ -108,6 +98,15 @@ function sendNumber() {
     }
   }
 }
+
+// quando usuario aperta enter o botao chama a function click() que chama a function sendNumber()
+const enterKey = document.querySelector('#guess');
+enterKey.addEventListener('keyup', (e) => {
+  if (e.keyCode === 13) {
+    e.preventDefault();
+    document.querySelector('#send-btn').click();
+  }
+})
 
 // começar o jogo com o número zero
 function startGame() {
@@ -174,29 +173,29 @@ function numObj() {
 
 // Verificando o primer número para atribuir a classe correta no LED
 function segmentNumberOne() {
-  numObj(); 
+  numObj();
 
-  if(realDigits[0] == 1) {
+  if (realDigits[0] == 1) {
     displayOne.classList.add('display-no-1');
-  } else if(realDigits[0] == 2) {
+  } else if (realDigits[0] == 2) {
     displayOne.classList.add('display-no-2');
-  } else if(realDigits[0] == 3) {
+  } else if (realDigits[0] == 3) {
     displayOne.classList.add('display-no-3');
-  } else if(realDigits[0] == 4) {
+  } else if (realDigits[0] == 4) {
     displayOne.classList.add('display-no-4');
-  } else if(realDigits[0] == 5) {
+  } else if (realDigits[0] == 5) {
     displayOne.classList.add('display-no-5');
-  } else if(realDigits[0] == 6) {
+  } else if (realDigits[0] == 6) {
     displayOne.classList.add('display-no-6');
-  } else if(realDigits[0] == 6) {
+  } else if (realDigits[0] == 6) {
     displayOne.classList.add('display-no-6');
-  } else if(realDigits[0] == 7) {
+  } else if (realDigits[0] == 7) {
     displayOne.classList.add('display-no-7');
-  } else if(realDigits[0] == 8) {
+  } else if (realDigits[0] == 8) {
     displayOne.classList.add('display-no-8');
-  } else if(realDigits[0] == 9) {
+  } else if (realDigits[0] == 9) {
     displayOne.classList.add('display-no-9');
-  } else if(realDigits[0] == 0) { // Condição para o usuário não começar com 0 o seu valor
+  } else if (realDigits[0] == 0) { // Condição para o usuário não começar com 0 o seu valor
     alert('O número não pode começar com 0!');
     startGame();
   }
@@ -206,27 +205,27 @@ function segmentNumberOne() {
 function segmentNumberTwo() {
   numObj();
 
-  if(realDigits[1] == 1) {
+  if (realDigits[1] == 1) {
     displayTwo.classList.add('display-no-1');
-  } else if(realDigits[1] == 2) {
+  } else if (realDigits[1] == 2) {
     displayTwo.classList.add('display-no-2');
-  } else if(realDigits[1] == 3) {
+  } else if (realDigits[1] == 3) {
     displayTwo.classList.add('display-no-3');
-  } else if(realDigits[1] == 4) {
+  } else if (realDigits[1] == 4) {
     displayTwo.classList.add('display-no-4');
-  } else if(realDigits[1] == 5) {
+  } else if (realDigits[1] == 5) {
     displayTwo.classList.add('display-no-5');
-  } else if(realDigits[1] == 6) {
+  } else if (realDigits[1] == 6) {
     displayTwo.classList.add('display-no-6');
-  } else if(realDigits[1] == 6) {
+  } else if (realDigits[1] == 6) {
     displayTwo.classList.add('display-no-6');
-  } else if(realDigits[1] == 7) {
+  } else if (realDigits[1] == 7) {
     displayTwo.classList.add('display-no-7');
-  } else if(realDigits[1] == 8) {
+  } else if (realDigits[1] == 8) {
     displayTwo.classList.add('display-no-8');
-  } else if(realDigits[1] == 9) {
+  } else if (realDigits[1] == 9) {
     displayTwo.classList.add('display-no-9');
-  } else if(realDigits[1] == 0) {
+  } else if (realDigits[1] == 0) {
     displayTwo.classList.add('display-no-0');
   }
 }
@@ -235,27 +234,27 @@ function segmentNumberTwo() {
 function segmentNumberThree() {
   numObj();
 
-  if(realDigits[2] == 1) {
+  if (realDigits[2] == 1) {
     displayThree.classList.add('display-no-1');
-  } else if(realDigits[2] == 2) {
+  } else if (realDigits[2] == 2) {
     displayThree.classList.add('display-no-2');
-  } else if(realDigits[2] == 3) {
+  } else if (realDigits[2] == 3) {
     displayThree.classList.add('display-no-3');
-  } else if(realDigits[2] == 4) {
+  } else if (realDigits[2] == 4) {
     displayThree.classList.add('display-no-4');
-  } else if(realDigits[2] == 5) {
+  } else if (realDigits[2] == 5) {
     displayThree.classList.add('display-no-5');
-  } else if(realDigits[2] == 6) {
+  } else if (realDigits[2] == 6) {
     displayThree.classList.add('display-no-6');
-  } else if(realDigits[2] == 6) {
+  } else if (realDigits[2] == 6) {
     displayThree.classList.add('display-no-6');
-  } else if(realDigits[2] == 7) {
+  } else if (realDigits[2] == 7) {
     displayThree.classList.add('display-no-7');
-  } else if(realDigits[2] == 8) {
+  } else if (realDigits[2] == 8) {
     displayThree.classList.add('display-no-8');
-  } else if(realDigits[2] == 9) {
+  } else if (realDigits[2] == 9) {
     displayThree.classList.add('display-no-9');
-  } else if(realDigits[2] == 0) {
+  } else if (realDigits[2] == 0) {
     displayThree.classList.add('display-no-0');
   }
 }
